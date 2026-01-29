@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Classes & Services</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="about.html">About Us</a>
+            <a href="custom.html">Community</a>
+        </nav>
+        <button onclick="viewCart()">View Shopping Cart</button>
+    </header>
+
+    <section class="classes-grid">
+
+        <div class="class-card">
+            <img src="images/Cardio Training Cardio Training .jpeg" alt="Personal Training">
+            <h3>Personal Training</h3>
+            <p>One-on-one coaching</p>
+            <span>$50</span>
+            <button onclick="addToCart('Personal Training', 50)">Add to Cart</button>
+        </div>
+
+        <div class="class-card">
+            <img src="images/Group workout.jpeg" alt="Yoga Class">
+            <h3>Yoga Class</h3>
+            <p>Group yoga session</p>
+            <span>$25</span>
+            <button onclick="addToCart('Yoga Class', 25)">Add to Cart</button>
+        </div>
+
+        <div class="class-card">
+            <img src="images/Yoga Class.jpeg" alt="Cardio Training">
+            <h3>Cardio Training</h3>
+            <p>High intensity cardio</p>
+            <span>$30</span>
+            <button onclick="addToCart('Cardio Training', 30)">Add to Cart</button>
+        </div>
+
+    </section>
+    <section class="classes-grid">
+
+        <div class="class-card">
+            <img src="images/Client2_IndividualKickboxing.png" alt="Personal Training">
+            <h3>Personal Training</h3>
+            <p>One-on-one coaching</p>
+            <span>$50</span>
+            <button onclick="addToCart('Personal Training', 50)">Add to Cart</button>
+        </div>
+
+        <div class="class-card">
+            <img src="images/Client2_IndividualPilates.png" alt="Yoga Class">
+            <h3>Yoga Class</h3>
+            <p>Group yoga session</p>
+            <span>$25</span>
+            <button onclick="addToCart('Yoga Class', 25)">Add to Cart</button>
+        </div>
+
+        <div class="class-card">
+            <img src="images/Client2_IndividualYoga.png" alt="Cardio Training">
+            <h3>Cardio Training</h3>
+            <p>High intensity cardio</p>
+            <span>$30</span>
+            <button onclick="addToCart('Cardio Training', 30)">Add to Cart</button>
+        </div>
+
+    </section>
+    <section class="classes-grid">
+
+        <div class="class-card">
+            <img src="images/Cardio Training Cardio Training .jpeg" alt="Personal Training">
+            <h3>Personal Training</h3>
+            <p>One-on-one coaching</p>
+            <span>$50</span>
+            <button onclick="addToCart('Personal Training', 50)">Add to Cart</button>
+        </div>
+
+        <div class="class-card">
+            <img src="images/Group workout.jpeg" alt="Yoga Class">
+            <h3>Yoga Class</h3>
+            <p>Group yoga session</p>
+            <span>$25</span>
+            <button onclick="addToCart('Yoga Class', 25)">Add to Cart</button>
+        </div>
+
+        <div class="class-card">
+            <img src="images/Yoga Class.jpeg" alt="Cardio Training">
+            <h3>Cardio Training</h3>
+            <p>High intensity cardio</p>
+            <span>$30</span>
+            <button onclick="addToCart('Cardio Training', 30)">Add to Cart</button>
+        </div>
+
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cartBox">
+        <h3>Shopping Cart</h3>
+        <ul id="cartItems"></ul>
+        <button onclick="clearCart()">Clear Cart</button>
+        <button onclick="processOrder()">Process Order</button>
+    </div>
+
+    <footer>
+        <p>Subscribe to our Newsletter</p>
+        <input type="email" placeholder="Email">
+        <button onclick="subscribe()">Subscribe</button>
+    </footer>
+
+    <script>
+        function subscribe() {
+            alert("Thank you for subscribing.");
+        }
+
+        function getCart() {
+            return JSON.parse(sessionStorage.getItem("cart")) || [];
+        }
+
+        function saveCart(cart) {
+            sessionStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        function addToCart(name, price) {
+            let cart = getCart();
+            cart.push({ name, price });
+            saveCart(cart);
+            alert("Item added to the cart.");
+        }
+
+        function viewCart() {
+            let cart = getCart();
+            let list = document.getElementById("cartItems");
+            list.innerHTML = "";
+
+            if (cart.length === 0) {
+                list.innerHTML = "<li>Cart is empty</li>";
+            } else {
+                cart.forEach(item => {
+                    let li = document.createElement("li");
+                    li.textContent = item.name + " - $" + item.price;
+                    list.appendChild(li);
+                });
+            }
+
+            document.getElementById("cartBox").style.display = "block";
+        }
+
+        function clearCart() {
+            sessionStorage.removeItem("cart");
+            document.getElementById("cartItems").innerHTML = "";
+            alert("Cart cleared.");
+        }
+
+        function processOrder() {
+            sessionStorage.removeItem("cart");
+            document.getElementById("cartItems").innerHTML = "";
+            alert("Thank you for your order.");
+        }
+    </script>
+
+</body>
+
+</html>
